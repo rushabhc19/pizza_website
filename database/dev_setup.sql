@@ -1,11 +1,9 @@
--- Setup for development machine
--- Create pizzadb, or recreate it
--- Create a user for it
-drop database if exists pizzadb; -- only for your server
-create database pizzadb; -- only for your own server
+-- create and select the database
+DROP DATABASE IF EXISTS proj2_server;
+CREATE DATABASE proj2_server;
 
-GRANT SELECT, INSERT, DELETE, UPDATE
-ON pizzadb.*
-TO pizza_user@localhost
+-- Create a user named svr_user
+GRANT SELECT, INSERT, UPDATE, DELETE, ALTER
+ON proj2_server.*
+TO svr_user@localhost
 IDENTIFIED BY 'pa55word';
-
