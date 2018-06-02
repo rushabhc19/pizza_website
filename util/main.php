@@ -16,36 +16,44 @@ set_include_path($project_root);
 // We also need $app_path for the project
 // app_path is the part of $project_root past $doc_root
 $app_path = substr($project_root, strlen($doc_root));
-// echo '<br>in main.php, project root = ' . $project_root;
+
+if (gethostname() === 'topcat') {
 // for debugging when you don't have access to the PHP config or log
-error_reporting(E_ALL | E_STRICT);
-ini_set('display_errors', '1');
-ini_set('log_errors', 1);
+    error_reporting(E_ALL | E_STRICT);
+    ini_set('display_errors', '1');
+    ini_set('log_errors', 1);
 // the following file needs to exist, be accessible to apache
 // and writable (on Linux: chmod 777 php-errors.log,
 // Windows defaults to writable)
 // Use an absolute file path to create just one log for the web app
-ini_set('error_log', $project_root . 'php-errors.log');
+    ini_set('error_log', $project_root . 'php-errors.log');
+}
 error_log('=====Starting request: ' . $_SERVER['REQUEST_URI']);
-if (isset($_GET)) {
-      foreach ($_GET as $key => $entry) {
-        if (is_array($entry)) {
-            error_log('$_GET:' . $key . ": " . implode(',', $entry));
-        } else {
-            error_log('$_GET:' . $key . ": " . $entry);
-        }
-    }
+
+// Get common code
+require_once('tags.php');
+require_once('model/database.php');
+
+// Define some common functions
+function display_db_error($error_message) {
+    global $app_path;
+    include 'errors/db_error.php';
+    debug_print_backtrace();
+    exit;
 }
-//  error_log(  '===========$_GET: '. print_r($_GET));
-if (isset($_POST)) {
-    foreach ($_POST as $key => $entry) {
-        if (is_array($entry)) {
-            error_log('$_POST:' . $key . ": " . implode(',', $entry));
-        } else {
-            error_log('$_POST:' . $key . ": " . $entry);
-        }
-    }
+
+function display_error($error_message) {
+    global $app_path;
+    include 'errors/error.php';
+    exit;
 }
-// Start session 
+
+function redirect($url) {
+    session_write_close();
+    header("Location: " . $url);
+    exit;
+}
+
+// Start session to store user and cart data
 session_start();
 ?>
