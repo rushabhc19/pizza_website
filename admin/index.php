@@ -1,17 +1,17 @@
-<?php
-require('../util/main.php');
+<?php 
+    require_once('../util/main.php');
+    require_once('../util/secure_conn.php');
+    require_once('../util/valid_admin.php');
+    include 'view/header.php';
+    include 'view/sidebar_admin.php';
 ?>
 
-<?php  include '../view/header.php'; ?>
-<section>
+<main>
     <h1>Admin Menu</h1>
-    <ul class="last_paragraph">
-        <li><a href="topping">Topping Manager</a></li>
-        <li><a href="size">Size Manager</a></li>
-        <li><a href="day">Day Manager</a></li>
-        <li><a href="order">Order Manager</a></li>
-    </ul>
-    
-</section>
+    <p><a href="product">Product Manager</a></p>
+    <p><a href="category">Category Manager</a></p>
+    <p><a href="orders">Order Manager</a></p>
+    <p><a href="account">Account Manager</a></p>
+</main>
 
-<?php include '../view/footer.php'; ?>
+<?php include 'view/footer.php'; ?>
