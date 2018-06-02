@@ -1,8 +1,6 @@
-<?php include 'util/main.php';
-include 'view/header.php'; ?>
+<?php include 'view/header.php'; ?>
 <main>
-  <section>
-    <h1>Home</h1>
+    <h1>Menu</h1>
     <ul>
         <li>
             <a href="admin">Shop Manager</a>
@@ -11,6 +9,5 @@ include 'view/header.php'; ?>
             <a href="pizza">Pizza Shop for Students</a>
         </li>
     </ul>
-  </section>
 </main>
-<?php include 'view/footer.php';
+<?php include 'view/footer.php'; ?>
